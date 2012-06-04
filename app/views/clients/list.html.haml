@@ -1,0 +1,30 @@
+- @page_title = "Manage Clients"
+
+= link_to "<< Back to User Menu", {:controller => 'access'}, :class => 'back-link'
+
+%div(class ="client list")
+  %h2 Clients
+  = link_to "Add New Client", {:action => 'new'}, :class => 'action new'
+  %div= "#{pluralize(@clients.size, 'client')} found for #{session[:username]}"
+  
+  %table.listing(summary="Client list")
+    %tr.header
+      %th Client
+      %th Farms
+      %th View Farms
+      %th Total Sales
+      %th View Sales
+      %th Actions
+    - @clients.each do |client|
+      %tr{:class=> cycle('odd', 'even')}
+        %td= link_to client.name, {:controller => 'farms', :action => 'review', :client_id => client.id}
+        %td.center= client.farms.size
+        %td.actions
+          = link_to "View Farms", {:controller => 'farms', :action => 'list', :client_id => client.id}, :class => 'action show'
+        %td.center= client.sales.size
+        %td.actions
+          = link_to "View Corn", {:controller => 'sales', :action => 'list', :client_id => client.id, :crop_id => "1"}, :class => 'action show'
+          = link_to "View Soybean", {:controller => 'sales', :action => 'list', :client_id => client.id, :crop_id => "2"}, :class => 'action show'
+        %td.actions
+          = link_to "Edit", {:action => 'edit', :id => client.id}, :class => 'action edit'
+          = link_to "Delete", {:action => 'delete', :id => client.id}, :class => 'action delete'

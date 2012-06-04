@@ -1,0 +1,10 @@
+- @page_title = "Edit Sale: #{@sale.id}"
+
+= link_to "<< Back to Sales", {:action => 'list', :client_id => @client.id, :crop_id => @sale.crop_id}, :class => 'back-link'
+
+%div(class="sale edit)
+  %h2 Update Sale
+  = form_for(:sale, :url => {:action => 'update', :id => @sale.id, :client_id => @client.id}) do |f|
+    = render(:partial => 'form', :locals => {:f => f})
+    .form-buttons
+      = submit_tag("Update Sale")

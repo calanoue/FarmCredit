@@ -1,0 +1,31 @@
+%table(summary="Farm Insurance form fields")
+  %tr
+    %th= f.label(:name, "Farm Name")
+    %td= f.text_field(:name)
+  %tr
+    %th= f.label(:county_id, "County")
+    %td= f.select(:county_id, County.all.map { |county| [county.name, county.id] }, :selected => @farm.county_id)
+  %tr
+    %th= f.label(:crop_year, "Crop Year")
+    %td= f.select(:crop_year, @crop_years)
+  %tr
+    %th= f.label(:corn_aph, "Corn APH")
+    %td= f.text_field(:corn_aph)
+  %tr
+    %th= f.label(:soybean_aph, "Soybean APH")
+    %td= f.text_field(:soybean_aph)
+  %tr
+    %th= f.label(:corn_interest, "Corn Interest")
+    %td= f.select(:corn_interest, @interest_levels)
+  %tr
+    %th= f.label(:soybean_interest, "Soybean Interest")
+    %td= f.select(:soybean_interest, @interest_levels)
+  %tr
+    %th= f.label(:corn_acre, "Corn Acres")
+    %td= f.text_field(:corn_acre)
+  %tr
+    %th= f.label(:soybean_acre, "Soybean Acres")
+    %td= f.text_field(:soybean_acre)
+  %tr
+    %th= f.label(:added_land, "Added Land")
+    %td= f.check_box(:added_land)

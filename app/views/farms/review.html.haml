@@ -1,0 +1,51 @@
+- @page_title = "#{@client.name} Farm Review"
+
+= link_to "<< Back to Farm List", {:action => 'list', :client_id => @client.id}, :class => 'back-link'
+
+%div(class="farm review")
+  %h2= "Review of Crop Year #{@crop_year}"
+  = form_for(:farm, :url => {:action => 'review'}) do |f|
+    = label_tag "Review Year:"
+    = select_tag "crop_year", options_for_select([2008, 2009]), :include_blank => true
+    = f.label "View:"
+    = f.select :county, @counties.collect {|c| [c.county_name, c.id]}
+    = submit_tag("Review Farms")
+  %table(width="100%")
+    - @counties.each do |county|
+      %tr
+      - @crops.each do |crop|
+        %td(width="50%")
+          %table.review
+            %tr.header
+              %th Interest
+              %th Farm Name
+              %th Production (bu)
+              %th Acres
+              %th Yield (bu/acre)
+              %th % of Total Acres
+            - get_farms()
+            - @farms.each do |farm|
+              %tr 
+                %td farm.interest
+                %td= farm.name
+                %td= farm.production
+                %td= farm.acres
+                %td= farm.production/farm.acres
+                %td= farm.acres/@total_acres
+            %table.footer
+              %tr
+                %td 
+                  %b Total
+                %td &nbsp;
+                %td= @total_production
+                %td= @total_acres
+                %td &nbsp;
+                %td &nbsp;
+                %td 
+                  %b Average Yield
+                %td &nbsp;
+                %td &nbsp;
+                %td &nbsp;
+                %td= @avg_yield
+                %td &nbsp;
+            

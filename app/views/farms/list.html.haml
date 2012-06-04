@@ -1,0 +1,19 @@
+- @page_title = "#{@client.name} Farms"
+
+= link_to "<< Back to Clients List", {:controller => "clients", :action => 'list'}, :class => 'back-link'
+
+%div(class="farm list")
+  %h2 Farms
+  = link_to "Add New Farm", {:action => 'new', :client_id => @client.id}, :class => 'action new'
+  %table.listing(summary="Farm list")
+    %tr.header
+      %th Farm
+      %th County
+      %th Actions
+    - @farms.each do |farm|
+      %tr
+        %td= farm.name
+        %td= County.find(farm.county_id).name
+        %td.actions
+          = link_to "Edit", {:action => 'edit', :id => farm.id, :client_id => @client.id}, :class => 'action edit'
+          = link_to "Delete", {:action => 'delete', :id => farm.id, :client_id => @client.id}, :class => 'action delete'

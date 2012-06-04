@@ -1,0 +1,10 @@
+- @page_title = "New Farm"
+
+= link_to "<< Back to Farm List", {:action => 'list', :client_id => @client.id}, :class => 'back-link'
+
+%div(class="farm new")
+  %h2 Enter New Farm
+  = form_for(:farm_insurance, :url => {:action => 'create'}) do |f|
+    = render(:partial => "form", :locals => {:f => f})
+    .form-buttons
+      = submit_tag("New Farm")

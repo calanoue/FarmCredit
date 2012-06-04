@@ -1,0 +1,11 @@
+- @page_title = "Delete Sale: #{@sale.id}"
+
+= link_to "<< Back to Sales", {:action => 'list', :client_id => @client.id, :crop_id => @sale.crop_id}, :class => 'back-link'
+
+%div(class="sale delete")
+  %h2 Delete Sale
+  = form_for(:sale, :url => {:action => 'destroy', :id => @sale.id, :client_id => @client.id}) do |f|
+    %p Are you sure you want to permanently delete this sale?
+    %p(class="reference-name")= @sale.id
+    .form-buttons
+      = submit_tag("Delete Sale")

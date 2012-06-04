@@ -1,0 +1,16 @@
+%table(summary="Sale form fields")
+  %tr
+    %th= f.label(:client_id)
+    %td= @client.name
+  %tr
+    %th= f.label(:crop_id)
+    %td= @crop.name
+  %tr
+    %th= f.label(:bushel_sold)
+    %td= f.text_field(:bushel_sold)
+  %tr
+    %th= f.label(:price)
+    %td= f.text_field(:price)
+  %tr
+    %th= f.label(:date)
+    %td= f.text_field(:date)

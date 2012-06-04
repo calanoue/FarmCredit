@@ -1,0 +1,11 @@
+- @page_title = "Delete User: #{@user.name}"
+
+= link_to "<< Back to List", {:action => 'list'}, :class => 'back-link'
+
+%div(class="user delete")
+  %h2 Delete User
+  = form_for(:user, :url => {:action => 'destroy', :id => @user.id}) do |f|
+    %p Are you sure you want to permanently delete this user?
+    %p.reference-name= @user.name
+    .form-buttons
+      = submit_tag("Delete User")

@@ -1,0 +1,92 @@
+- @page_title = "Crop Insurance Evaluator | #{@crop.name}"
+
+= link_to "<< Back to Farm List", {:action => 'list', :client_id => @client.id}, :class => 'back-link'
+
+%div(class="farm evaluator")
+  %h2= "Prospect Crop Insurance Evaluator - #{@crop.name}"
+  = form_for(:farm, :url => {:action => 'review'}) do |f|
+    = f.label "Select County:"
+    = f.select :county, @counties
+    = label_tag "Select APH:"
+    = text_tag "aph"
+    = "(0 for APH, 1 for expected yield, and else for generalized APH)"
+    = submit_tag("Review Farms")
+  %h3= "#{@crop.name} Totals"
+  %table
+    %tr
+      %th Farm
+      %th County
+      %th Int.
+      %th APH
+      %th Expected Acres
+      %th Net Acres
+      %th % of Net Acres per County
+      %th &nbsp;
+      %th Coverage Level
+      %th Guaranteed Bushels
+      %th &nbsp;
+      %th Spring Base
+      %th Revenue
+      %th Revenue Guarantee
+      %th &nbsp;
+    - @farms.each do |farm|
+      %tr
+        %td= farm.name
+        %td= farm.county
+        %td= farm.interest
+        %td= farm.aph
+        %td= farm.acres
+        %td= farm.net_acres
+        %td= farm.net_acres/@total_net_acres
+        %td x
+        %td= farm.coverage_level
+        %td= farm.guar_bus
+        %td x
+        %td= farm.revenue
+        %td= farm.revenue/farm.net_acres
+        %td /acre
+      %table.footer
+        %tr
+          - @selected_counties.each do |county|
+            %td County Totals:
+            %td= county.name
+            %td &nbsp;
+            %td &nbsp;
+            %td= @total_exp_acres
+            %td= @total_net_acres
+            %td &nbsp;
+            %td &nbsp;
+            %td &nbsp;
+            %td= @total_guar_bus
+            %td &nbsp;
+            %td &nbsp;
+            %td= @total_revenue
+            %td &nbsp;
+        %tr
+          %td Crop Totals:
+          %td &nbsp;
+          %td &nbsp;
+          %td &nbsp;
+          %td= @total_exp_acres
+          %td= @total_net_acres
+          %td &nbsp;
+          %td &nbsp;
+          %td &nbsp;
+          %td= @total_guar_bus
+          %td Bushels
+          %td &nbsp;
+          %td= @total_revenue
+          %td &nbsp;
+      %table.footer
+        %tr 
+          %td Weighted APH:
+          %td (whole farm)
+          %td= @total_weighted_aph
+          - [1..12].each do |i|
+            %td &nbsp;
+        - @counties.each do |county|
+          %tr
+            %td= county.name
+            %td= @county_weighted_aph
+            - [1..12].each do |i|
+              %td &nbsp;

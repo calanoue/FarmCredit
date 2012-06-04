@@ -1,0 +1,10 @@
+- @page_title = "Edit Client: #{@client.name}"
+
+= link_to "<< Back to List", {:action => 'list'}, :class => 'back-link'
+
+%div(class="client edit")
+  %h2 Update Client
+  = form_for(:client, :url => {:action => 'update', :id => @client.id}) do |f|
+    = render(:partial => "form", :locals => {:f => f})
+    .form-buttons
+      = submit_tag("Update Client")

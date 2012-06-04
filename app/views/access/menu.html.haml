@@ -1,0 +1,7 @@
+- @page_title = "User Menu"
+
+.menu
+  .identity= "Logged in as: #{session[:username]}"
+  %ul
+    %li= link_to("Manage Clients", :controller => 'clients')
+    %li= link_to("Logout", :action => 'logout')

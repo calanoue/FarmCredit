@@ -1,0 +1,10 @@
+- @page_title = "New Client"
+
+= link_to "<< Back to List", {:action => 'list'}, :class => 'back-link'
+
+%div(class="client new")
+  %h2 Enter New Client
+  = form_for(:client, :url => {:action => 'create'}) do |f|
+    = render(:partial => "form", :locals => {:f => f})
+    .form-buttons
+      = submit_tag("Create Client")

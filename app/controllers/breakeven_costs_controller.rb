@@ -1,0 +1,2 @@
+class BreakevenCostsController < ApplicationController
+end

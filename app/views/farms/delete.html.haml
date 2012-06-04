@@ -1,0 +1,11 @@
+- @page_title = "Delete Farm: #{@farm.name}"
+
+= link_to "<< Back to Farm List", {:action => 'list', :client_id => @client.id}, :class => 'back-link'
+
+%div(class="farm delete")
+  %h2 Delete Farm
+  = form_for(:farm, :url => {:action => 'destroy', :id => @farm.id}) do |f|
+    %p Are you sure you want to permanently delete this farm?
+    %p.reference-name= @farm.name
+    .form-buttons
+      = submit_tag("Delete Farm")

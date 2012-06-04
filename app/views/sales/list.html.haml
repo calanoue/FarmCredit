@@ -1,0 +1,25 @@
+- @page_title = "Sales"
+
+= link_to "<< Back to Client List", {:controller => "clients", :action => 'list'}, :class => 'back-link'
+
+%div(class="sale list")
+  %h2= "#{@crop.name.singularize} Sales"
+  = link_to "Add New Sale", {:action => 'new', :client_id => @client.id, :crop_id => @crop.id}, :class => 'action new'
+  %table(class="listing" summary="Sale list")
+    %tr.header
+      %th Sale
+      %th Bushels Sold
+      %th Price
+      %th Total Sale
+      %th Date Sold
+      %th Actions
+    - @sales.each_with_index do |sale, index|
+      %tr
+        %td.center= index + 1
+        %td.center= number_with_delimiter(sale.bushel_sold)
+        %td.center= number_to_currency(sale.price)
+        %td.center= number_to_currency(sale.price*sale.bushel_sold)         
+        %td.center= sale.date.strftime("%B %d, %Y")
+        %td.actions
+          = link_to "Edit", {:action => 'edit', :id => sale.id, :client_id => @client.id}, :class => 'action edit'
+          = link_to "Delete", {:action => 'delete', :id => sale.id, :client_id => @client.id}, :class => 'action delete'

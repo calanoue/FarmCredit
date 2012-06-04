@@ -1,0 +1,10 @@
+- @page_title = "Enter Sale"
+
+= link_to "<< Back to Sales", {:action => 'list', :client_id => @client.id, :crop_id => @crop.id}, :class => 'back-link'
+
+%div(class="sale new")
+  %h2 Enter Sale
+  = form_for(:sale, :url => {:action => 'create', :client_id => @client.id}) do |f|
+    = render(:partial => 'form', :locals => {:f => f})
+    .form-buttons
+      = submit_tag("Enter Sale")

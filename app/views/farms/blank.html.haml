@@ -1,0 +1,25 @@
+      - get_farms(crop.id, county.county_id)
+      - @farms.each do |farm|
+        %tr 
+          %td= farm.interest
+          %td= farm.name
+          %td= farm.production
+          %td= farm.acres
+          %td= farm.production/farm.acres
+          %td= farm.acres/@total_acres
+      %table.footer
+        %tr
+          %td 
+            %b Total
+          %td &nbsp;
+          %td= @total_production
+          %td= @total_acres
+          %td &nbsp;
+          %td &nbsp;
+          %td 
+            %b Average Yield
+          %td &nbsp;
+          %td &nbsp;
+          %td &nbsp;
+          %td= @avg_yield
+          %td &nbsp;
